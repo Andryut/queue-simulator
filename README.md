@@ -1,2 +1,2 @@
-# queue-simulator
+# Queue-Simulator
 Queue simulator project, from Codum Academy.
