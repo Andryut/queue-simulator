@@ -1,13 +1,13 @@
 class Queue < Array
 
-  def add element:
-    self << element
+  def add customer:
+    self << customer
   end
 
   def remove
-    element = self.first
+    firstCustomerInQueue = self.first
     self.delete(0)
-    return element
+    return firstCustomerInQueue
   end
 
   def update
