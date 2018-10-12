@@ -4,8 +4,8 @@ class AttendedList
     @list = Array.new
   end
 
-  def add client:
-    @list << client
+  def add customer:
+    @list << customer
   end
 
   def waitTimeAverage
