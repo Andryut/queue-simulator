@@ -9,6 +9,7 @@ class AttendedList
   end
 
   def waitTimeAverage
-    @list.sum/@list.length
+    average = @list.sum/@list.length
+    return average
   end
 end
