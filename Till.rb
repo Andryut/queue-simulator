@@ -3,14 +3,22 @@ class Till
   def initialize queue:, attendedList:
     @queue = queue
     @attendedList = attendedList
-    unless queue.empty?
-      self.nextPurchase
-    end
+    @atentionDelay = 0
+    self.checkout
   end
 
   def checkout
-    @atentionDelay -= 1
-    self.
+    if @atentionDelay == 0
+      unless @actualCustomer.nil?
+        self.endPurchase
+      else
+        unless @queue.empty?
+          self.nextPurchase
+        end
+      end
+    else
+      @atentionDelay -= 1
+    end
   end
 
   protected
@@ -21,9 +29,11 @@ class Till
   end
 
   def endPurchase
-    @attendedList << @actualCustomer
-    unless queue.empty?
+    @attendedList.add(customer: @actualCustomer)
+    unless @queue.empty?
       self.nextPurchase
+    else
+      @acutalCustomer = nil
     end
   end
 end
