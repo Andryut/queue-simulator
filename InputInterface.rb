@@ -75,3 +75,21 @@ class InputEnumFormat < InputFormat
 	end
 end
 
+class InputInterface
+	def initialize
+		@formats = []
+	end
+	def addIntInput message:""
+		@formats.push(InputIntFormat.new message:message)
+	end
+	def addEnumInput options: []
+		@formats.push(InputEnumFormat.new options:options)
+	end
+	def read
+		data = []
+		@formats.each do |inputFormat|
+			data.push(inputFormat.execute)
+		end
+		return data
+	end
+end
