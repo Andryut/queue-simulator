@@ -39,3 +39,39 @@ class InputIntFormat < InputFormat
 	end
 end
 
+class InputEnumFormat < InputFormat
+	attr_accessor :errorMessage, :options
+	def initialize message:"Enter the number of the option you want", options:[], errorMessage: "The value entered is incorrect"
+		super message
+		@errorMessage = errorMessage
+		@options = options
+	end
+	def execute
+		puts message
+		for i in 1..options.length
+			puts ("#{i}) #{options[i-1]}")
+		end
+		isCorrect = false
+		value = 0
+		until isCorrect
+			print(": ")
+			input = gets.chomp()
+			if is_valid? input
+				value = input.to_i
+				isCorrect = true
+			else
+				puts(@errorMessage)
+			end
+		end 
+		return value
+	end
+	def is_valid? value
+		if InputFormat.is_i? value
+			if(value.to_i >0 and value.to_i <= options.length)
+				return true
+			end
+		end
+		return false
+	end
+end
+
