@@ -1,2 +1,2 @@
-simQueue = SimulationProgram.new
-simQueue.start
+sim_queue = SimulationProgram.new
+sim_queue.start
