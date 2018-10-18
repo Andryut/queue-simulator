@@ -1,11 +1,11 @@
 class SimulationProgram
 
   def initialize
-    @inputInterface = InputInterface.new
+    @input_interface = InputInterface.new
   end
 
   def start
-    data = @inputInterface.read
+    data = @input_interface.read
     @simulation = Simulation.new(data: data)
     @simulation.run
   end
