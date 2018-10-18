@@ -1,5 +1,5 @@
 class Till
-
+  attr_accessor :attendedList, :queue
   def initialize queue:, attendedList:
     @queue = queue
     @attendedList = attendedList
