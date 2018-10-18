@@ -8,7 +8,7 @@ class AttendedList
     @list << customer
   end
 
-  def waitTimeAverage
+  def wait_time_average
     average = @list.sum/@list.length
     return average
   end
