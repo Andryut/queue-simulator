@@ -92,12 +92,12 @@ class InputInterface
 		@formats = {}
 	end
 
-	def add_int_input(message: "", symbol:)
-		@formats.merge!({symbol => InputIntFormat.new(message: message)})
+	def add_int_input(message: "", key:)
+		@formats.merge!({key => InputIntFormat.new(message: message)})
 	end
 
-	def add_enum_input(options: [], symbol:)
-		@formats.merge!({symbol => InputEnumFormat.new(options: options)})
+	def add_enum_input(options: [], key:)
+		@formats.merge!({key => InputEnumFormat.new(options: options)})
 	end
 
 	def read
