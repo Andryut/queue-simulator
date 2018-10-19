@@ -89,21 +89,21 @@ end
 class InputInterface
 
 	def initialize
-		@formats = []
+		@formats = {}
 	end
 
-	def add_int_input message:""
-		@formats.push(InputIntFormat.new message:message)
+	def add_int_input(message: "", symbol:)
+		@formats.merge!({symbol => InputIntFormat.new(message: message)})
 	end
 
-	def add_enum_input options: []
-		@formats.push(InputEnumFormat.new options:options)
+	def add_enum_input(options: [], symbol:)
+		@formats.merge!({symbol => InputEnumFormat.new(options: options)})
 	end
 
 	def read
-		data = []
-		@formats.each do |input_format|
-			data.push(input_format.execute)
+		data = {}
+		@formats.each do |key, value|
+			data.merge!({key => value.execute})
 		end
 		return data
 	end
