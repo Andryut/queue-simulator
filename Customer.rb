@@ -1,10 +1,10 @@
-load "LetterChain.rb"
-
 class Customer
+
+  @@identifier = LetterChain.new
+  attr_reader :waiting_time
 
   def initialize
     @waiting_time = 0
-    @@identifier = LetterChain.new
     @id = @@identifier.next
   end
 
@@ -17,7 +17,12 @@ class Customer
     @waiting_time += 1
   end
 
+  def to_s
+    return @id
+  end
+
   protected
+
   def shortest_queue queues:
     short = queues.first
     queues.each do |queue|
@@ -26,9 +31,5 @@ class Customer
       end
     end
     return short
-  end
-  
-  def to_s
-    return id
   end
 end

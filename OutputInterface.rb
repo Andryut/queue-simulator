@@ -1,8 +1,6 @@
-load "Till.rb"
-
 module OutputType
-	MultiQueue = 1
-	OnlyOneQueue = 2
+	MultiQueue = 2
+	OnlyOneQueue = 1
 end
 
 class OutputInterface
@@ -16,7 +14,7 @@ class OutputInterface
 		output_text = []
 		output_text<<""
 		output_text<<""
-		if @type == OutputType.MultiQueue
+		if @type == OutputType::MultiQueue
 			max = get_max tills:tills
 			for i in 1..max
 				output_text<<""
@@ -32,10 +30,9 @@ class OutputInterface
 					else
 						output_text[i+2] += space
 					end
-
 				end
 			end
-		elsif @type == OutputType.OnlyOneQueue
+		elsif @type == OutputType::OnlyOneQueue
 			tills.each do |till|
 				output_text[0] += "|CC| "
 				output_text[1] += "|#{till.actual_customer.to_s}| "

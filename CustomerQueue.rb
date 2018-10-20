@@ -1,4 +1,4 @@
-class Queue < Array
+class CustomerQueue < Array
 
   def add customer:
     self << customer
