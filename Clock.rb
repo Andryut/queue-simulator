@@ -12,7 +12,7 @@ class Clock
       @time -= 1
       unless @time == @initial_time
         sleep @offset
-        puts ""
+        Gem.win_platform? ? (system "cls") : (system "clear")
       end
     end
     return got_time

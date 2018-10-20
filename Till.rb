@@ -1,7 +1,7 @@
 class Till
 
-  attr_reader :attended_list, :queue, :actual_customer
-  
+  attr_reader :queue, :actual_customer
+
   def initialize queue:, attended_list:
     @queue = queue
     @attended_list = attended_list
@@ -27,7 +27,7 @@ class Till
   def next_purchase
     @actual_customer = @queue.remove
     random_creator = Random.new
-    @atention_delay = random_creator.rand(4..25)
+    @atention_delay = random_creator.rand(4..10)
   end
 
   def end_purchase

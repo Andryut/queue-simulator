@@ -32,7 +32,6 @@ class Simulation
       @queues[i%queues_number] =  CustomerQueue.new
       @tills.push Till.new(queue: @queues[i%queues_number], attended_list: @attended_list)
     end
-    puts @queues.length
   end
 
   def checkout
@@ -46,7 +45,7 @@ class Simulation
 
   def generate_customers
     random_creator = Random.new
-    new_customers = random_creator.rand(0..5)
+    new_customers = random_creator.rand(0..3)
     (0...new_customers).each do
       queue = self.min_length_queue
       queue.add customer: Customer.new
