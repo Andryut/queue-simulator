@@ -1,39 +1,41 @@
 class Till
-  attr_reader :attendedList, :queue, :actualCustomer
-  def initialize queue:, attendedList:
+
+  attr_reader :attended_list, :queue, :actual_customer
+  
+  def initialize queue:, attended_list:
     @queue = queue
-    @attendedList = attendedList
-    @atentionDelay = 0
+    @attended_list = attended_list
+    @atention_delay = 0
     self.checkout
   end
 
   def checkout
-    if @atentionDelay == 0
-      unless @actualCustomer.nil?
-        self.endPurchase
+    if @atention_delay == 0
+      unless @actual_customer.nil?
+        self.end_purchase
       else
         unless @queue.empty?
-          self.nextPurchase
+          self.next_purchase
         end
       end
     else
-      @atentionDelay -= 1
+      @atention_delay -= 1
     end
   end
 
   protected
-  def nextPurchase
-    @actualCustomer = @queue.remove
-    randomCreator = Random.new
-    @atentionDelay = randomCreator.rand(4..25)
+  def next_purchase
+    @actual_customer = @queue.remove
+    random_creator = Random.new
+    @atention_delay = random_creator.rand(4..25)
   end
 
-  def endPurchase
-    @attendedList.add(customer: @actualCustomer)
+  def end_purchase
+    @attended_list.add(customer: @actual_customer)
     unless @queue.empty?
-      self.nextPurchase
+      self.next_purchase
     else
-      @acutalCustomer = nil
+      @actual_customer = nil
     end
   end
 end

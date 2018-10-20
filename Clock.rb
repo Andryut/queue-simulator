@@ -1,16 +1,16 @@
 class Clock
 
-  def initialize totalTime:, offset:
-    @time = totalTime
+  def initialize total_time:, offset:
+    @time = total_time
     @offset = offset
   end
-  
+
   def running?
-    gotTime = time > 0
-    if gotTime
-      totalTime -= 1
+    got_time = time > 0
+    if got_time
+      total_time -= 1
       sleep offset
     end
-    return gotTime
+    return got_time
   end
 end

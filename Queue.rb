@@ -5,9 +5,9 @@ class Queue < Array
   end
 
   def remove
-    firstCustomerInQueue = self.first
+    first_customer_in_queue = self.first
     self.delete(0)
-    return firstCustomerInQueue
+    return first_customer_in_queue
   end
 
   def update

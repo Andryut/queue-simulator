@@ -1,70 +1,81 @@
 class InputFormat
+
 	attr_accessor :message
+
 	def initialize message
 		@message = message+": "
 	end
+
 	def execute
 		print(message)
 		return gets.chomp()
 	end
+
 	def self.is_i? value
 		if !/\A\d+\z/.match(value)
 			return false
 		else
 			return true
-		end 
+		end
 	end
 end
 
 class InputIntFormat < InputFormat
-	attr_accessor :errorMessage
-	def initialize message:"Enter a value", errorMessage: "The value entered does not have the correct format"
+
+	attr_accessor :error_message
+
+	def initialize message:"Enter a value", error_message: "The value entered does not have the correct format"
 		super message
-		@errorMessage = errorMessage
+		@error_message = error_message
 	end
+
 	def execute
-		isCorrect = false
+		is_correct = false
 		value = 0
-		until isCorrect
+		until is_correct
 			print(message)
 			input = gets.chomp()
 			if InputFormat.is_i? input
 				value = input.to_i
-				isCorrect = true
+				is_correct = true
 			else
-				puts(@errorMessage)
+				puts(@error_message)
 			end
-		end 
+		end
 		return value
 	end
 end
 
 class InputEnumFormat < InputFormat
-	attr_accessor :errorMessage, :options
-	def initialize message:"Enter the number of the option you want", options:[], errorMessage: "The value entered is incorrect"
+
+	attr_accessor :error_message, :options
+
+	def initialize message:"Enter the number of the option you want", options:[], error_message: "The value entered is incorrect"
 		super message
-		@errorMessage = errorMessage
+		@error_message = error_message
 		@options = options
 	end
+
 	def execute
 		puts message
 		for i in 1..options.length
 			puts ("#{i}) #{options[i-1]}")
 		end
-		isCorrect = false
+		is_correct = false
 		value = 0
-		until isCorrect
+		until is_correct
 			print(": ")
 			input = gets.chomp()
 			if is_valid? input
 				value = input.to_i
-				isCorrect = true
+				is_correct = true
 			else
-				puts(@errorMessage)
+				puts(@error_message)
 			end
-		end 
+		end
 		return value
 	end
+
 	def is_valid? value
 		if InputFormat.is_i? value
 			if(value.to_i >0 and value.to_i <= options.length)
@@ -76,19 +87,23 @@ class InputEnumFormat < InputFormat
 end
 
 class InputInterface
+
 	def initialize
-		@formats = []
+		@formats = {}
 	end
-	def addIntInput message:""
-		@formats.push(InputIntFormat.new message:message)
+
+	def add_int_input(message: "", key:)
+		@formats.merge!({key => InputIntFormat.new(message: message)})
 	end
-	def addEnumInput options: []
-		@formats.push(InputEnumFormat.new options:options)
+
+	def add_enum_input(options: [], key:)
+		@formats.merge!({key => InputEnumFormat.new(options: options)})
 	end
+
 	def read
-		data = []
-		@formats.each do |inputFormat|
-			data.push(inputFormat.execute)
+		data = {}
+		@formats.each do |key, value|
+			data.merge!({key => value.execute})
 		end
 		return data
 	end
