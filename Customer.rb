@@ -1,7 +1,11 @@
+load "LetterChain.rb"
+
 class Customer
 
   def initialize
     @waiting_time = 0
+    @@identifier = LetterChain.new
+    @id = @@identifier.next
   end
 
   def enter_a_queue queues:
@@ -22,5 +26,9 @@ class Customer
       end
     end
     return short
+  end
+  
+  def to_s
+    return id
   end
 end
