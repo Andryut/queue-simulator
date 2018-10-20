@@ -1,54 +1,58 @@
 load "Till.rb"
+
 module OutputType
 	MultiQueue = 1
 	OnlyOneQueue = 2
 end
+
 class OutputInterface
 
-	def initialize type
+	def initialize type:
 		@type = type
 	end
+
 	def print tills:
 		letters = LetterChain.new
-		outputText = []
-		outputText<<""
-		outputText<<""
+		output_text = []
+		output_text<<""
+		output_text<<""
 		if @type == OutputType.MultiQueue
-			max = getMax tills:tills
+			max = get_max tills:tills
 			for i in 1..max
-				outputText<<""
+				output_text<<""
 			end
 			tills.each do |till|
-				outputText[0] += "|C | "
-				outputText[1] += "|#{till.actualCustomer.to_s}| "
+				output_text[0] += "|CC| "
+				output_text[1] += "|#{till.actual_customer.to_s}| "
 				count = 2
 				space = " "*5
 				for i in 0..max-1
 					if i < till.queue.length
-						outputText[i+2] += "|#{till.queue[i].to_s}| "
+						output_text[i+2] += "|#{till.queue[i].to_s}| "
 					else
-						outputText[i+2] += space
+						output_text[i+2] += space
 					end
 
 				end
 			end
 		elsif @type == OutputType.OnlyOneQueue
 			tills.each do |till|
-				outputText[0] += "|C | "
-				outputText[1] += "|#{till.actualCustomer.to_s}| "
+				output_text[0] += "|CC| "
+				output_text[1] += "|#{till.actual_customer.to_s}| "
 			end
 			queue = tills[0].queue
 			position = (tills.length/2)*5
 			space = " "*position
 			queue.each do |customer|
-				outputText<<"#{space}|#{customer.to_s}| "
+				output_text<<"#{space}|#{customer.to_s}| "
 			end
 		end
-		outputText.each do |line|
+		output_text.each do |line|
 			puts line
 		end
 	end
-	def getMax tills:
+
+	def get_max tills:
 		max = 0
 		tills.each do |till|
 			if till.queue.length > max
