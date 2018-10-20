@@ -6,7 +6,7 @@ class CustomerQueue < Array
 
   def remove
     first_customer_in_queue = self.first
-    self.delete(0)
+    self.delete_at 0
     return first_customer_in_queue
   end
 

@@ -9,8 +9,10 @@ class SimulationProgram
   end
 
   def start
+    Gem.win_platform? ? (system "cls") : (system "clear")
     data = @input_interface.read
     @simulation = Simulation.new(data: data)
+    Gem.win_platform? ? (system "cls") : (system "clear")
     @simulation.run
   end
 end

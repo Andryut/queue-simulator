@@ -27,12 +27,14 @@ class Simulation
       queues_number = active_tills
     elsif simulation_type == OutputType::OnlyOneQueue
       queues_number = 1
+      @queues[0] =  CustomerQueue.new
     end
     for i in 0...active_tills
-      @queues[i%queues_number] =  CustomerQueue.new
+      unless simulation_type == OutputType::OnlyOneQueue
+        @queues[i%queues_number] =  CustomerQueue.new
+      end
       @tills.push Till.new(queue: @queues[i%queues_number], attended_list: @attended_list)
     end
-    puts @queues.length
   end
 
   def checkout
@@ -54,16 +56,20 @@ class Simulation
   end
 
   def min_length_queue
-    queue = @queues[0]
-    @queues.each do |a_queue|
-      if queue.length > a_queue.length
-        queue = a_queue
+    till = @tills[0]
+    @tills.each do |a_till|
+      if till.queue.length > a_till.queue.length
+        till = a_till
+      elsif till.queue.length == a_till.queue.length and a_till.queue.length == 0
+        unless till.actual_customer.nil?
+          till = a_till
+        end
       end
     end
-    return queue
+    return till.queue
   end
 
   def finish
-    puts "#{@attended_list.wait_time_average}"
+    puts "The mean wait time was: #{@attended_list.wait_time_average}"
   end
 end

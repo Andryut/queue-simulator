@@ -10,7 +10,7 @@ class AttendedList
 
   def wait_time_average
     unless @list.empty?
-      average = @list.sum/@list.length
+      average = @list.sum.to_f/@list.length.to_f
     else
       average = 0
     end
