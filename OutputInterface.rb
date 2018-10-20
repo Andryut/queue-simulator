@@ -41,7 +41,7 @@ class OutputInterface
 			position = (tills.length/2)*5
 			space = " "*position
 			queue.each do |customer|
-				outputText<<"|#{customer.to_s}| "
+				outputText<<"#{space}|#{customer.to_s}| "
 			end
 		end
 		outputText.each do |line|
