@@ -27,7 +27,7 @@ class Till
   def next_purchase
     @actual_customer = @queue.remove
     random_creator = Random.new
-    @atention_delay = random_creator.rand(4..10)
+    @atention_delay = random_creator.rand(4..25)
   end
 
   def end_purchase

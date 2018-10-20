@@ -38,12 +38,16 @@ class OutputInterface
 		max_queue = get_max tills: tills
 		for i in 0...max_queue
 			line = ""
-			tills.each do |till|
-				unless till.queue[i].nil?
-					line += "|" +  till.queue[i].to_s + self.fill_of(" ", @max_length - till.queue[i].to_s.length) + "| "
-				else
-					line += "|" +  self.fill_of(" ", @max_length) + "| "
+			unless @type == OutputType::OnlyOneQueue
+				tills.each do |till|
+					unless till.queue[i].nil?
+						line += "|" +  till.queue[i].to_s + self.fill_of(" ", @max_length - till.queue[i].to_s.length) + "| "
+					else
+						line += " " +  self.fill_of(" ", @max_length) + "  "
+					end
 				end
+			else
+				line += "|" +  tills[0].queue[i].to_s + self.fill_of(" ", @max_length - tills[0].queue[i].to_s.length) + "| "
 			end
 			@output_text << line
 		end
