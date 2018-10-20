@@ -1,29 +1,32 @@
 class LetterChain
+
 	def initialize
-		@alphabet = ["A", "B", "C", "D", "E", "F",
+		@alphabet = ["A", "B", "D", "E", "F",
 			"G", "H", "I", "J", "K", "L",
 			"M", "N", "O", "P", "Q", "R",
 			"S", "T", "U", "V", "W", "X",
 			"Y", "Z"]
 		@chain = [0,0]
 	end
+
 	def next
-		lastValue = to_s
-		currentLetter = @chain.length() -1
-		if is_Z? @chain[currentLetter]
-			while is_Z? @chain[currentLetter]
-				@chain[currentLetter] = 0
-				currentLetter -= 1
+		last_value = to_s
+		current_letter = @chain.length() -1
+		if is_Z? @chain[current_letter]
+			while is_Z? @chain[current_letter]
+				@chain[current_letter] = 0
+				current_letter -= 1
 			end
-			if currentLetter >= 0
-				@chain[currentLetter] += 1
+			if current_letter >= 0
+				@chain[current_letter] += 1
 			end
 			@chain<<0
 		else
-			@chain[currentLetter] += 1
+			@chain[current_letter] += 1
 		end
-		return lastValue
+		return last_value
 	end
+
 	def is_Z? value
 		return @alphabet[value] == "Z"
 	end
